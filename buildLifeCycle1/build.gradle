@@ -1,0 +1,21 @@
+println ">>> build.gradle ---> this is executed during the configuration phase -- timestamp @ ${gradle.timestamp()}"
+logger.info ">>>  build.gradle: ${gradle.gradleVersion}"
+logger.info ">>> build.gradle: ${gradle.gradleHomeDir}"
+logger.info ">>> build.gradle: ${gradle.gradleUserHomeDir}"
+
+logger.info ">>> build.gradle: ${project.buildFile}"
+logger.info ">>> build.gradle: ${project.relativePath(project.buildFile)}"
+logger.info "has property: ${project.gradle.hasProperty('gradleVersion')}"
+
+if(project.hasProperty('gradlePropertiesProp')){
+	logger.info "the property value is $gradlePropertiesProp"
+}else{
+	logger.info "oops"
+}
+
+project.ext.sayHello="Hello!"
+if(project.hasProperty('sayHello')){
+	logger.info sayHello
+}else{
+	logger.info "Unable to say hello!"
+}

@@ -1,0 +1,2 @@
+println ">>> settings.gradle ---> this is executed during the initialization phase -- timestamp @ ${gradle.timestamp()}"
+logger.info ">>> settings.gradle: ${settings.gradle.gradleVersion}"
