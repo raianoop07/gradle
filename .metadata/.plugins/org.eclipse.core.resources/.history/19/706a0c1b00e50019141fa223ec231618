@@ -1,0 +1,10 @@
+defaultTasks 'hello'
+
+task('hello').doLast{
+	println 'Hello Last'
+}
+
+task hi
+project.hi.doLast{
+	logger.info "Hi"
+}

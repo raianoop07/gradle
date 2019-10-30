@@ -1,0 +1,17 @@
+defaultTasks 'hello'
+
+task('hello').doLast{
+	println 'Hello Last'
+}
+
+task hi
+project.hi.doLast{
+	logger.info "Hi"
+}
+
+task doHello{
+	description="Log the name of Task"
+	group="Welcome"
+}
+logger.info doHello.description
+logger.info doHello.group

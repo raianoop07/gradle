@@ -1,0 +1,44 @@
+plugins {
+  id 'java'
+  id 'war'
+  id 'project-report'
+}
+
+group = 'com.denofprogramming'
+version = '0.0.1-SNAPSHOT'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+project.ext.tomcatHome = 'C:/software/Apache Software Foundation/apache-tomcat-9.0.1'
+project.ext.tomcatWebapps = "C:/Users/POOJA SINGH/Desktop/Anoop"
+
+repositories{
+	mavenCentral()
+}
+
+
+dependencies { 
+
+
+	implementation 'org.springframework:spring-webmvc:4.0.3.RELEASE'
+	implementation 'javax.inject:javax.inject:1'
+	implementation 'org.apache.commons:commons-math3:3.2'
+	implementation 'jstl:jstl:1.2'
+	implementation 'log4j:log4j:1.2.17'
+		
+		
+	compileOnly "javax.servlet:javax.servlet-api:3.0.1"
+	testImplementation	'junit:junit:4.11'
+
+}
+
+war{
+	archiveName = 'mywebapp.war'	
+}
+
+task deployToTomcat(type: Copy, dependsOn: 'war'){	
+	from war.archivePath
+    into "$tomcatWebapps"	
+}

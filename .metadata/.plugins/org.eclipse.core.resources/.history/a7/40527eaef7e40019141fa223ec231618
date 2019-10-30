@@ -1,0 +1,9 @@
+defaultTasks 'hello'
+
+task('hello').doLast{
+	println 'Hello Last'
+}
+
+task('hello').doFirst{
+	println 'Hello Last'
+}

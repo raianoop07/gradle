@@ -1,0 +1,44 @@
+defaultTasks 'hi', 'doHello', 'doHello2'
+
+task('hello').doLast{
+	println 'Hello Last'
+}
+
+task hi
+project.hi.doLast{
+	logger.info "Hi"
+}
+
+task doHello{
+	description="Log the name of Task"
+	group="Welcome"
+	doFirst{
+		logger.info "1st: My name is: $name"
+	}
+	doLast{
+		logger.info "2nd: My name is: $name"
+	}
+}
+doHello.doLast{
+	logger.info "3rd: My name is: $name"
+}
+doHello.doFirst{
+	logger.info "4th: My name is: $name"
+}
+logger.info doHello.description
+logger.info doHello.group
+
+
+task doHello2{
+	description="Log the name of Task"
+	group="Welcome"
+}
+hello2.doFirst{
+	logger.info "1st: My name is: $name"
+}.doLast{
+	logger.info "2nd: My name is: $name"
+}.doLast{
+	logger.info "3rd: My name is: $name"
+}.doFirst{
+	logger.info "4th: My name is: $name"
+}

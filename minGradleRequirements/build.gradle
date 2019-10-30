@@ -1,0 +1,9 @@
+//defaultTasks 'hello'
+
+task('hello').doLast{
+	println "Hello World"
+}
+
+println "Hello"
+
+System.out.println("Hello Anoop");

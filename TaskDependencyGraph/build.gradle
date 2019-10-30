@@ -1,0 +1,44 @@
+defaultTasks 'doFinished'
+
+println ">>> build.gradle ---> this is executed during the configuration phase -- timestamp @ ${gradle.timestamp()}"
+
+task doStartProcess{
+	doLast{
+		logger.info "$name - Now starting the process!"
+	}
+}
+
+task doStep2{
+	doLast{
+		logger.info "$name - Performed!"
+	}
+}
+
+task doSomethingInTheMiddle (dependsOn: ['doStartProcess', project.tasks.findAll{ task->task.name.startsWith('dpStep2') } ]){
+	doLast{
+		logger.info "$name - Performed the middle step!"
+	}
+}
+
+task doFinished (dependsOn: ['doSomethingInTheMiddle', 'doStep2']){
+	doLast{
+		logger.info "$name - Done! with version=$version"
+	}
+}
+
+project.gradle.taskGraph.whenReady{ taskGraph ->
+	if(taskGraph.hasTask(doStep2)){
+		project.version = '1.0'
+	}else{
+		project.version = '1.0-SNAPSHOT'
+	}
+	logger.info "$project.gradle.taskGraph.allTasks"
+}
+
+project.gradle.taskGraph.beforeTask{ task ->
+	logger.info "+++Before task $task.name"
+}
+
+project.gradle.taskGraph.afterTask{ task ->
+	logger.info "+++After task $task.name"
+}
